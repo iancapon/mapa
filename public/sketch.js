@@ -4,7 +4,7 @@ let assets = {
 }
 let mapa = undefined
 let colectivos = undefined
-let zoom = 1
+let zoom = 0.5
 
 function preload() {
     assets.caba = loadJSON("./map_assets/callejero.JSON")
@@ -15,11 +15,16 @@ function setup() {
     mapa = new Mapa(assets, 800 * 4)
     colectivos = new Trayectos(assets, mapa.getEscala())
 
-    colectivos.cargar_linea("111","A")
-    colectivos.cargar_linea("152","A")
-    colectivos.cargar_linea("29","A")
-    colectivos.cargar_linea("61","A")
-    colectivos.cargar_linea("62","A")
+    colectivos.cargar_linea("132","A")
+    colectivos.cargar_linea("092","A")
+    colectivos.cargar_linea("026","A")
+    colectivos.cargar_linea("001","A")
+    colectivos.cargar_linea("076","A")
+    colectivos.cargar_linea("053","A")
+    colectivos.cargar_linea("113","A")
+    colectivos.cargar_linea("101","A")
+    colectivos.cargar_linea("007","A")
+    colectivos.cargar_linea("145","A")
 
     createCanvas(1920 * 2, 1080 * 2)
     noLoop()
