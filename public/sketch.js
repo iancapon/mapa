@@ -23,7 +23,7 @@ function setup() {
     calles = Calles(MAPA)
     avenidas = Avenidas(MAPA)
 
-    lineas_de_bondi = buscar_lineas(LINEAS,["111","152","29","61","62"])
+    lineas_de_bondi = buscar_lineas(LINEAS,["111","152","29","61","62","12","64","15","39","110","118"])
     //lineas_de_bondi = todas_las_lineas(LINEAS)
 
     escala = factorDeEscala(calles, avenidas, 800*4)
@@ -40,7 +40,7 @@ function draw() {
     translate(1500, 50)
     background(0)
 
-    stroke(255,255)
+    stroke(255,100)
     strokeWeight(4)
     renderizar(avenidas)
 
