@@ -35,13 +35,14 @@ function setup() {
 function draw() {
     scale(zoom)
     translate(50, 50)
-    background(255)
+    colorMode(HSB,100)
+    background(50,30,30)
 
-    mapa.dibujar_mapa(0)
+    mapa.dibujar_mapa(90)
 
     colectivos.dibujar_mapa()
 
-    UI()
+    UI(90)
 
     dibujarMarcador()// POSICION ACTUAL
 
@@ -49,18 +50,18 @@ function draw() {
     //    save("imagen.png")
 }
 
-function UI(){
-    stroke(0)
+function UI(color){
+    stroke(color)
     strokeWeight(3)
-    fill(0)
+    fill(color)
     textFont('Courier New', 100);
     textAlign(CENTER, CENTER)
     text("COLECTIVOS DE CABA", 1400 * 2, 100 * 2)
 
     textFont('Courier New', 50);
     colectivos.colores.forEach((linea, index) => {
-        fill(100, 100, 0)
-        stroke(0)
+        fill(color)
+        stroke(color)
         text(linea.linea, 1400 * 2, 100 * 2 + 60 * (index + 2))
         fill(linea.color, 90, 90, 70)
         noStroke()
