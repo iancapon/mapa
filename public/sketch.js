@@ -46,7 +46,7 @@ function draw() {
     dibujarMarcador()// POSICION ACTUAL
 
     // DESCOMENTAR PARA GUARDAR IMAGEN APENAS CARGA EN EL NAVEGADOR
-    //    save("imagen.jpg")
+    //    save("imagen.png")
 }
 
 function UI(){
