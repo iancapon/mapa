@@ -51,6 +51,29 @@ const Trayectos = function (assets, escala) {
         }
     }
 
+    this.cargar_lineas_cercanas = function (coordinates, radio) {
+        const lineasCercanas = [];
+        assets.lineas.features.forEach(feature => {
+            let isNear = false;
+            // Iterar sobre cada recorrido de la línea
+            feature.geometry.coordinates.forEach(lineSegment => {
+                lineSegment.forEach(point => {
+                    const distancia = calcularDistancia(coordinates, point);
+
+                    if (distancia <= radio) {
+                        isNear = true;
+                    }
+                });
+            });
+            if (isNear) {
+                lineasCercanas.push(feature);
+            }
+        });
+        this.lineas_cubiertas = lineasCercanas;
+    }
+
+    
+
     this.buscar_instancias_de_tipo_recorrido = function (arreglo, numero) {
         return arreglo.filter(feature => feature.properties.linea == numero)
     }
