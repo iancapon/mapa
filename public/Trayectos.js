@@ -17,6 +17,42 @@ const Trayectos = function (assets, escala) {
         })
     }
 
+    this.cargar_lineas_cercanas = function (coordinates, radio) {
+        const lineasCercanas = [];
+        assets.lineas.features.forEach(feature => {
+            let isNear = false;
+            // Iterar sobre cada recorrido de la línea
+            feature.geometry.coordinates.forEach(lineSegment => {
+                lineSegment.forEach(point => {
+                    const distancia = calcularDistancia(coordinates, point);
+
+                    if (distancia <= radio) {
+                        isNear = true;
+                    }
+                });
+            });
+            if (isNear) {
+                lineasCercanas.push(feature);
+            }
+        });
+        this.lineas_cubiertas = lineasCercanas;
+    }
+
+    function calcularDistancia(coord1, coord2) {
+        const R = 6371000; // Radio de la Tierra en metros
+        const lat1 = coord1[1] * (Math.PI / 180);
+        const lon1 = coord1[0] * (Math.PI / 180);
+        const lat2 = coord2[1] * (Math.PI / 180);
+        const lon2 = coord2[0] * (Math.PI / 180);
+        const dLat = lat2 - lat1;
+        const dLon = lon2 - lon1;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1) * Math.cos(lat2) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // distancia en metros
+    }
+
     this.renderizar = function (datos) {
         //console.log(datos)
         try {
