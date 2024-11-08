@@ -8,4 +8,4 @@ app.use("/",(req,res)=>{
     res.redirect("./public/main.html")
 })
 
-app.listen(8000,_=>console.log("ESCUCHANDO PUERTO 8000"))
+app.listen(8000,_=>console.log("SERVER RUNNING: open http://localhost:8000/ on your browser =)"))
