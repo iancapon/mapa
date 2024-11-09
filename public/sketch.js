@@ -20,12 +20,13 @@ function setup() {
     colectivos = new Trayectos(assets, mapa.getEscala())
 
     //colectivos.cargar_lineas_cercanas([p_x,p_y],radio)
-    colectivos.cargar_linea("111","A",20)
-    colectivos.cargar_linea("152","A",73)
-    colectivos.cargar_linea("062","A",39)
-    colectivos.cargar_linea("039","A",8)
-    colectivos.cargar_linea("029","A",16)
-    colectivos.cargar_linea("092","A",48)
+    
+    colectivos.cargar_linea("111", "A", 20)
+    colectivos.cargar_linea("152", "A", 73)
+    colectivos.cargar_linea("062", "A", 39)
+    colectivos.cargar_linea("039", "A", 8)
+    colectivos.cargar_linea("029", "A", 16)
+    colectivos.cargar_linea("092", "A", 48)
 
     createCanvas(1920 * 2, 1080 * 2)
     noLoop()
@@ -40,15 +41,33 @@ function draw() {
 
     colectivos.dibujar_mapa()
 
-    textSize(60)
-    stroke(0)
-    strokeWeight(1)
-    fill(0)
-    text("RED DE TRANSPORTE", 1500 * 2, 200 * 2)
+    UI()
 
-    //dibujarMarcador(p_x, p_y); 
+    dibujarMarcador()// POSICION ACTUAL
+
+    // DESCOMENTAR PARA GUARDAR IMAGEN APENAS CARGA EN EL NAVEGADOR
+    //    save("imagen.jpg")
 }
 
+function UI(){
+    stroke(0)
+    strokeWeight(3)
+    fill(0)
+    textFont('Courier New', 100);
+    textAlign(CENTER, CENTER)
+    text("COLECTIVOS DE CABA", 1400 * 2, 100 * 2)
+
+    textFont('Courier New', 50);
+    colectivos.colores.forEach((linea, index) => {
+        fill(100, 100, 0)
+        stroke(0)
+        text(linea.linea, 1400 * 2, 100 * 2 + 60 * (index + 2))
+        fill(linea.color, 90, 90, 70)
+        noStroke()
+        circle(1400 * 2 - 80, 100 * 2 + 60 * (index + 2), 40)
+
+    })
+}
 
 function dibujarMarcador(longitud, latitud) {
     // Convierte las coordenadas del mapa a la escala actual
@@ -56,7 +75,7 @@ function dibujarMarcador(longitud, latitud) {
     const x = (longitud + escala.desvioX) * escala.escala;
     const y = (escala.factor / escala.escala - (latitud + escala.desvioY)) * escala.escala;
     // Dibujar el círculo en el punto escalado
-    fill(100,100,100);
+    fill(100, 100, 100);
     strokeWeight(2); // Grosor del borde
     ellipse(x, y, 40); // Dibuja el círculo
 }
